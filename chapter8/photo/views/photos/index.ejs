@@ -6,7 +6,11 @@
 
 <ul>
   <% photos.forEach(function(photo) { %>
-    <li><%= photo.name %></li>
+    <li>
+      <%= photo.name %>
+      <%= photo.image_path %>
+      <img src="<%= photo.image_path %>" />
+    </li>
   <% }) %>
 </ul>
 

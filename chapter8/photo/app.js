@@ -7,15 +7,9 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var photos = require("./routes/photos");
+
 
 var app = express();
-
-
-// app.set("mongoose", mongoose);
-// app.set("Photo", Photo);
-
-photos.setApp(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,14 +17,19 @@ app.set('view engine', 'ejs');
 
 app.use(favicon());
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded());
+app.use(bodyParser());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var multer = require('multer');
+app.use(multer({ dest: './public/uploads/' }));
+
 app.use('/', routes);
 app.use('/users', users);
-app.use("/photos", photos);
+
+require("./routes/photos")(app);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
