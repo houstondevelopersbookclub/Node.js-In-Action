@@ -1,0 +1,13 @@
+<% include ../header %>
+
+<h1>Photos?</h1>
+
+<a href="/photos/new">Add photo</a>
+
+<ul>
+  <% photos.forEach(function(photo) { %>
+    <li><%= photo.name %></li>
+  <% }) %>
+</ul>
+
+<% include ../footer %>
